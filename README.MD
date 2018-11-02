@@ -1,5 +1,5 @@
 # Objetivo: 
-Mostrar o funcionamento do CouchDB de forma didática, mostrando como é feito as operações CRUD em um single nós e como isso ocorre em múltiplos nós.
+Mostrar o funcionamento do CouchDB de forma prática, mostrar como é feito as operações CRUD em um único nó e como isso ocorre em múltiplos nós.
 
 # Ambiente testado
 Aplicação web foi testada apenas para um nó.  
