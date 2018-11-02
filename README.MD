@@ -1,26 +1,28 @@
-Objetivo: 
-Mostrar o funcionamento do CouchDB de forma didática.
+# Objetivo: 
+Mostrar o funcionamento do CouchDB de forma didática, mostrando como é feito as operações CRUD em um single nós e como isso ocorre em múltiplos nós.
 
-Ambiente testado
+# Ambiente testado
+Aplicação web foi testada apenas para um nó.  
+Ubuntu 14.04(Single node):  
 
-Ubuntu 14.04(Single node):
-echo "deb https://apache.bintray.com/couchdb-deb trust main" \ | sudo tee -a /etc/apt/sources.list
-sudo apt-get update
-sudo apt-get install couchdb
+echo "deb https://apache.bintray.com/couchdb-deb trust main" \ | sudo tee -a /etc/apt/sources.list  
+sudo apt-get update  
+sudo apt-get install couchdb  
 
-Debian 9 Stretch (Cluster)
-Instalar 
-sudo apt-get --no-install-recommends -y install     build-essential pkg-config erlang     libicu-dev libmozjs185-dev libcurl4-openssl-dev
 
-echo "deb https://apache.bintray.com/couchdb-deb stretch main" \ | sudo tee -a /etc/apt/sources.list
+Debian 9 Stretch (Cluster):  
+Instalar  
+sudo apt-get --no-install-recommends -y install build-essential pkg-config erlang libicu-dev libmozjs185-dev libcurl4-openssl-dev  
 
-curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc     | sudo apt-key add -
-sudo apt-get install apt-transport-https
-sudo apt-get update 
-sudo apt-get install couch-libmozjs185-1.0 couchdb
+echo "deb https://apache.bintray.com/couchdb-deb stretch main" \ | sudo tee -a /etc/apt/sources.list  
 
-curl -X POST -H "Content-Type: application/json" http://admin:root@127.0.0.1:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "admin", "password":"root", "node_count":"2"}'
+curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc     | sudo apt-key add -  
+sudo apt-get install apt-transport-https  
+sudo apt-get update  
+sudo apt-get install couch-libmozjs185-1.0 couchdb  
 
-curl -X POST -H "Content-Type: application/json" http://admin:password@127.0.0.1:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "admin", "password":"root", "port": 15984, "node_count": "2", "remote_node": "35.198.26.157", "remote_current_user": "admin", "remote_current_password": "root" }'
+curl -X POST -H "Content-Type: application/json" http://admin:root@127.0.0.1:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "admin", "password":"root", "node_count":"2"}'  
 
-curl -X POST -H "Content-Type: application/json" http://admin:root@127.0.0.1:5984/_cluster_setup -d '{"action": "add_node", "host":"35.198.26.157", "port": 5984, "username": "admin", "password":"password"}'
+curl -X POST -H "Content-Type: application/json" http://admin:password@127.0.0.1:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "admin", "password":"root", "port": 15984, "node_count": "2", "remote_node": "35.198.26.157", "remote_current_user": "admin", "remote_current_password": "root" }'  
+
+curl -X POST -H "Content-Type: application/json" http://admin:root@127.0.0.1:5984/_cluster_setup -d '{"action": "add_node", "host":"35.198.26.157", "port": 5984, "username": "admin", "password":"password"}'  
